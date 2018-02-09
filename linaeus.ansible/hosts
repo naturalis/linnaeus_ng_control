@@ -1,0 +1,8 @@
+[development]
+dev-009 ansible_host=145.136.240.193
+
+[test]
+test-002 ansible_host=145.136.241.255
+
+[production]
+;various-002 ansible_host=172.16.1.54

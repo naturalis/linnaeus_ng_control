@@ -1,0 +1,5 @@
+---
+# defaults file for naturalis-linnaeus_ng
+git_branch_code: master
+git_branch_data: master
+
