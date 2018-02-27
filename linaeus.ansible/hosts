@@ -1,8 +1,58 @@
 [development]
+dev-001 ansible_host=145.136.240.185
+dev-002 ansible_host=145.136.240.181
+dev-003 ansible_host=145.136.240.186
+dev-004 ansible_host=145.136.240.187
+dev-005 ansible_host=145.136.240.189
+dev-006 ansible_host=145.136.240.190
+dev-007 ansible_host=145.136.240.191
+dev-008 ansible_host=145.136.240.192
 dev-009 ansible_host=145.136.240.193
 
 [test]
+test-001 ansible_host=145.136.241.137
 test-002 ansible_host=145.136.241.255
+test-003 ansible_host=145.136.241.26
+test-004 ansible_host=145.136.241.27
+test-005 ansible_host=145.136.241.28
+test-006 ansible_host=145.136.241.29
+demo-linnaeusng-002 ansible_host=162.13.81.28
 
 [production]
-;various-002 ansible_host=172.16.1.54
+various-001 ansible_host=172.16.1.52
+various-002 ansible_host=172.16.1.54
+various-003 ansible_host=172.16.1.55
+various-004 ansible_host=172.16.1.56
+various-005 ansible_host=172.16.1.57
+various-006 ansible_host=172.16.1.58
+various-007 ansible_host=172.16.1.59
+various-008 ansible_host=172.16.1.60
+various-009 ansible_host=172.16.1.61
+various-010 ansible_host=172.16.1.62
+various-011 ansible_host=172.16.1.63
+various-012 ansible_host=172.16.1.64
+various-013 ansible_host=172.16.1.65
+various-014 ansible_host=172.16.1.66
+various-015 ansible_host=172.16.1.67
+various-016 ansible_host=172.16.1.75
+various-017 ansible_host=172.16.1.79
+various-018 ansible_host=172.16.1.76
+various-019 ansible_host=172.16.1.77
+various-020 ansible_host=172.16.1.78
+various-021 ansible_host=172.16.1.80
+various-022 ansible_host=172.16.1.83
+various-023 ansible_host=172.16.1.81
+various-024 ansible_host=172.16.1.82
+various-025 ansible_host=172.16.1.84
+various-026 ansible_host=172.16.1.109
+various-027 ansible_host=172.16.1.96
+various-028 ansible_host=172.16.1.97
+various-029 ansible_host=172.16.1.98
+various-030 ansible_host=172.16.1.110
+various-031 ansible_host=172.16.1.100
+various-032 ansible_host=172.16.1.101
+various-033 ansible_host=172.16.1.102
+various-034 ansible_host=172.16.1.103
+various-035 ansible_host=172.16.1.104
+various-036	ansible_host=172.16.1.145
+nsr-linnaeusng-001 ansible_host=145.136.241.65
