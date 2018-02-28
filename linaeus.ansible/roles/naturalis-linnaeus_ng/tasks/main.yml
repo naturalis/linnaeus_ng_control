@@ -1,13 +1,13 @@
 ---
-- name: Linnaeus NG | Print disk space
+- name: Linnaeus NG | print disk space
   debug:
     msg: "{{ ansible_mounts[0].device }} : {{ (ansible_mounts[0].size_available /  ( 1024 ** 3 ) ) | round(2) }}GB "
 
-- name: Linnaeus NG | Show OS release
+- name: Linnaeus NG | print OS release
   debug:
     msg: "{{ ansible_distribution }} {{ ansible_distribution_version | string }} "
 
-- name: Linnaeus NG | Install packages
+- name: Linnaeus NG | install packages
   with_items:
     - python-pip
     - libmysqlclient-dev
@@ -18,13 +18,13 @@
   tags:
     - preliminaries
 
-- name: Linnaeus NG | Install MySQL pip package
+- name: Linnaeus NG | install MySQL pip package
   pip:
     name: MySQL
   tags:
     - preliminaries
 
-- name: Linaeus NG | create tools/output directory
+- name: Linnaeus NG | create tools/output & backup directories
   file:
     path: "{{ item }}"
     state: directory
@@ -34,7 +34,7 @@
   tags:
     - database
 
-- name: Linnaeus NG | Git update code
+- name: Linnaeus NG | GIT update code
   git:
     repo: git@github.com:naturalis/linnaeus_ng.git
     dest: /var/www/linnaeusng/
@@ -45,27 +45,27 @@
   tags:
     - code
 
-- name: Linnaeus NG | database model update
+- name: Linnaeus NG | create temp database
   mysql_db:
     name: ____TEMP_lng_test_database
     state: present
   tags:
     - database
 
-- name: Linnaeus NG | check_db_cli
+- name: Linnaeus NG | run check_db_cli
   command: php /var/www/linnaeusng/tools/check_db_cli.php
   changed_when: false
   tags:
     - database
 
-- name: Linnaeus NG | checking if latest-modify.sql exists 
+- name: Linnaeus NG | checking if latest-modify.sql exists
   stat:
     path: /var/www/linnaeusng/tools/output/latest-modify.sql
   register: latest_modify_sql
   tags:
     - database
 
-- name: Linnaeus NG | Dump linnaeusng database.
+- name: Linnaeus NG | backup existing LNG-database
   mysql_db:
     state: dump
     name: linnaeusng
@@ -74,7 +74,7 @@
   tags:
     - database
 
-- name: Linnaeus NG | Import latest-modify.sql
+- name: Linnaeus NG | import latest-modify.sql
   mysql_db:
     state: import
     name: linnaeusng
@@ -83,7 +83,7 @@
   tags:
     - database
 
-- name: Linnaeus NG | gather latest errros
+- name: Linnaeus NG | check latest errors-file
   shell: cat /var/www/linnaeusng/tools/output/latest-errors.txt
   register: latest_errors
   changed_when: false
