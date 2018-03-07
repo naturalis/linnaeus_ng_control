@@ -1,3 +1,6 @@
+[singleserver]
+test-dev-009 ansible_host=145.136.240.193
+
 [development]
 dev-001 ansible_host=145.136.240.185
 dev-002 ansible_host=145.136.240.181
