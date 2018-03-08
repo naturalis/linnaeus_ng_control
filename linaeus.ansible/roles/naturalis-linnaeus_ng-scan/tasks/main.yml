@@ -32,6 +32,47 @@
     return_content: yes
   register: webservice
 
+- name: Linnaeus NG | GIT fetch
+  git:
+    repo: git@github.com:naturalis/linnaeus_ng.git
+    refspec: '+refs/heads/*:refs/remotes/origin/*'
+    dest: /var/www/linnaeusng/
+    clone: no
+    update: no
+  register: git_result
+  tags:
+    - gitinfo
+
+- name: Linnaeus NG | GIT info 
+  shell: |
+    echo "last commit: `git show -s --format=%ci`"
+    echo "release: `git describe`"
+    echo "branch: `git rev-parse --abbrev-ref HEAD`"
+    echo "remote `git rev-list HEAD..origin --count` commits ahead of local"
+    echo "remote `git rev-list origin..HEAD --count` commits behind local"
+    exit 0
+  args:
+    chdir: /var/www/linnaeusng
+  register: git_info
+  changed_when: false
+  failed_when: false
+  tags:
+    - gitinfo
+
+
+- name: Linnaeus NG | output GIT information
+  debug:
+    var: git_info.stdout_lines
+  when: git_info is defined
+  tags:
+    - gitinfo
+
+- name: Linnaeus NG | output GIT lastcommit
+  debug:
+    var: git_lastcommit.stdout, git_description.stdout
+  tags:
+    - git
+
 - name: Linnaeus NG | output crontab_entries
   debug:
     var: crontab_entries.stdout_lines
@@ -51,4 +92,3 @@
   debug:
     var: webservice
   when: webservice is defined
-
