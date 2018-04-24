@@ -1,0 +1,84 @@
+---
+- name: Linnaeus NG | reading crontab entries
+  shell: crontab -l | sed '/^[[:blank:]]*#/d;s/#.*//'
+  changed_when: false
+  register: crontab_entries
+
+- name: Linnaeus NG | checking if /var/www/linnaeusng/.htaccess exists
+  stat:
+    path: /var/www/linnaeusng/.htaccess
+  register: htaccess_root_exist  
+  
+- name: Linnaeus NG | checking if /var/www/linnaeusng/www/.htaccess exists
+  stat:
+    path: /var/www/linnaeusng/www/.htaccess
+  register: htaccess_www_exist
+  
+- name: Linnaeus NG | reading .htaccess
+  command: cat /var/www/linnaeusng/.htaccess
+  register: htaccess_root
+  changed_when: false
+  when: htaccess_root_exist is defined and htaccess_root_exist.stat.exists == True
+ 
+- name: Linnaeus NG | reading www/.htaccess
+  command: cat /var/www/linnaeusng/www/.htaccess
+  register: htaccess_www
+  changed_when: false
+  when: htaccess_www_exist is defined and htaccess_www_exist.stat.exists == True
+
+- name: Linnaeus NG | output LNG vars webservice
+  uri:
+    url: "http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}/linnaeus_ng/admin/views/webservices/scan_servers.php?key=gNXhIb4LDKrA7MQmNo7wpV"
+    return_content: yes
+  register: webservice
+
+- name: Linnaeus NG | GIT fetch 
+  shell: cd /var/www/linnaeusng/;git fetch
+  changed_when: false
+  failed_when: false
+
+- name: Linnaeus NG | GIT description 
+  shell: cd /var/www/linnaeusng/;git description
+  register: git_description
+  changed_when: false
+  failed_when: false
+  tags:
+    - git
+
+- name: Linnaeus NG | GIT last commit 
+  shell: cd /var/www/linnaeusng/;git show -s --format=%ci
+  register: git_lastcommit
+  changed_when: false
+  failed_when: false
+  tags:
+    - git
+
+- name: Linnaeus NG | output GIT description
+  debug:
+    var: git_description.stdout
+  when: git_description is defined
+
+- name: Linnaeus NG | output GIT lastcommit
+  debug:
+    var: git_lastcommmit.stdout
+  when: git_lastcommmit is defined
+
+- name: Linnaeus NG | output crontab_entries
+  debug:
+    var: crontab_entries.stdout_lines
+  when: crontab_entries is defined
+
+- name: Linnaeus NG | output .htaccess
+  debug:
+    var: htaccess_root.stdout_lines
+  when: htaccess_root.stdout_lines is defined
+
+- name: Linnaeus NG | output www/.htaccess
+  debug:
+    var: htaccess_www.stdout_lines
+  when: htaccess_www.stdout_lines is defined
+
+- name: Linnaeus NG | output webservice
+  debug:
+    var: webservice
+  when: webservice is defined
