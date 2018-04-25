@@ -1,0 +1,3 @@
+- hosts: linnaeus-docker-dev
+  roles:
+    - naturalis-linnaeus_docker-control

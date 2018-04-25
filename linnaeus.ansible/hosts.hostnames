@@ -1,3 +1,6 @@
+[joepdev]
+linnaeus-docker-dev ansible_host=145.136.242.133 ansible_python_interpreter='/usr/bin/env python3'
+
 [singleserver]
 various-015 ansible_host=various-linnaeusng-015.naturalis.nl
 

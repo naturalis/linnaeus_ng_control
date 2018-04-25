@@ -9,9 +9,9 @@
 
 - name: Linnaeus NG | install packages
   with_items:
-    - python-pip
+    - python3-pip
     - libmysqlclient-dev
-    - python-dev
+    - python3-dev
   apt:
     name: "{{ item }}"
     update_cache: no
