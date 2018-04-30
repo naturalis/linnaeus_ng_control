@@ -25,6 +25,45 @@
   tags:
     - preliminaries
 
+- name: Linnaeus NG | checking if linnaeus directory exists
+  stat:
+    path: /data/linnaeus
+  register: linnaeus_directory
+  tags:
+    - preliminaries
+
+- name: Linnaeus NG | copy existing initdb directory
+  shell: 'mkdir /data/linnaeus'
+  when: linnaeus_directory.stat.exists == false
+  tags:
+    - preliminaries
+
+- name: Linnaeus NG | checking if initdb exists
+  stat:
+    path: /data/linnaeus/initdb
+  register: initdb_directory
+  tags:
+    - preliminaries
+
+- name: Linnaeus NG | copy existing initdb directory
+  shell: 'cp -r /opt/docker-linnaeusng/linnaeus/initdb /data/linnaeus/initdb'
+  when: initdb_directory.stat.exists == false
+  tags:
+    - preliminaries
+
+- name: Linnaeus NG | checking if mysqlconf exists
+  stat:
+    path: /data/linnaeus/mysqlconf
+  register: mysqlconf_directory
+  tags:
+    - preliminaries
+
+- name: Linnaeus NG | copy existing mysqlconf directory
+  shell: 'cp -r /opt/docker-linnaeusng/linnaeus/mysqlconf /data/linnaeus/mysqlconf'
+  when: mysqlconf_directory.stat.exists == false
+  tags:
+    - preliminaries
+
 - name: Linnaeus NG | install docker linnaeus
   shell: 'cd /opt/docker-linnaeusng;docker-compose down;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
   tags:
@@ -70,6 +109,39 @@
   changed_when: false
   tags:
     - checkdb
+
+      #shell: 'cat /opt/docker-linnaeusng/.env;echo {host:"$MYSQL_HOST", rootpass:"$MYSQL_ROOT_PASSWORD", user:"$MYSQL_USER", password:"$MYSQL_PASSWORD"}'
+
+
+- name: Linnaeus NG | source environment
+  shell: 'cat /opt/docker-linnaeusng/.env'
+  register: result
+  tags:
+    - testenv
+
+- name: Linnaeus NG | store environment
+  set_fact: 
+    output : "{{ result.stdout_lines | list }}"
+  tags:
+    - testenv
+
+- name: Debug
+  debug:
+    msg: 'PASS: {{output.password}} USER: {{output.user}}'
+  tags:
+    - testenv
+
+- name: Linnaeus NG | show environment
+  shell: '. /opt/docker-linnaeusng/.env;echo {"host":"$MYSQL_HOST", "rootpass":"$MYSQL_ROOT_PASSWORD", "user":"$MYSQL_USER", "password":"$MYSQL_PASSWORD"}'
+  register: dockerconfig
+  tags:
+    - environment
+
+- name: Linnaeus NG | display environment
+  debug:
+    msg: "Mysql User: {{ dockerconfig.user }}" 
+  tags:
+    - environment
 
 # todo: retrieve the root password from the installation
 - name: Linnaeus NG | backup existing LNG-database
