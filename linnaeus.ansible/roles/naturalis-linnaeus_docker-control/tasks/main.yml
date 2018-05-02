@@ -1,12 +1,15 @@
 ---
+# Show the disk remaining space
 - name: Linnaeus NG | print disk space
   debug:
     msg: "{{ ansible_mounts[0].device }} : {{ (ansible_mounts[0].size_available /  ( 1024 ** 3 ) ) | round(2) }}GB "
 
+# Display the OS version
 - name: Linnaeus NG | print OS release
   debug:
     msg: "{{ ansible_distribution }} {{ ansible_distribution_version | string }} "
 
+# Install essential python en mysql packages
 - name: Linnaeus NG | install packages
   with_items:
     - python-pip
@@ -19,12 +22,14 @@
   tags:
     - preliminaries
 
+# Install MySQL pip package
 - name: Linnaeus NG | install MySQL pip package
   pip:
     name: MySQL
   tags:
     - preliminaries
 
+# Linnaeus install directory should exist
 - name: Linnaeus NG | checking if linnaeus directory exists
   stat:
     path: /data/linnaeus
@@ -32,12 +37,14 @@
   tags:
     - preliminaries
 
+# Create a linnaeus install directory
 - name: Linnaeus NG | copy existing initdb directory
   shell: 'mkdir /data/linnaeus'
   when: linnaeus_directory.stat.exists == false
   tags:
     - preliminaries
 
+# Linnaeus initdb should exist
 - name: Linnaeus NG | checking if initdb exists
   stat:
     path: /data/linnaeus/initdb
@@ -45,12 +52,14 @@
   tags:
     - preliminaries
 
+# Copy the content of a default linnaeus install into initdb
 - name: Linnaeus NG | copy existing initdb directory
   shell: 'cp -r /opt/docker-linnaeusng/linnaeus/initdb /data/linnaeus/initdb'
   when: initdb_directory.stat.exists == false
   tags:
     - preliminaries
 
+# Check if the mysqlconf directory exists
 - name: Linnaeus NG | checking if mysqlconf exists
   stat:
     path: /data/linnaeus/mysqlconf
@@ -58,24 +67,41 @@
   tags:
     - preliminaries
 
+# If the mysqlconf directory does not exist copy the default mysqlconf directory 
 - name: Linnaeus NG | copy existing mysqlconf directory
   shell: 'cp -r /opt/docker-linnaeusng/linnaeus/mysqlconf /data/linnaeus/mysqlconf'
   when: mysqlconf_directory.stat.exists == false
   tags:
     - preliminaries
 
+# Check if the linnaeus git repository exists
+- name: Linnaeus NG | checking if git repository exists
+  stat:
+    path: /data/linnaeus/www/.git
+  register: linnaeus_git_directory
+  tags:
+    - preliminaries
+
+# Install the dockerized linnaeus install by pulling 'naturalis/linnaeus' and (re)creating 
+# the docker compose setup
 - name: Linnaeus NG | install docker linnaeus
   shell: 'cd /opt/docker-linnaeusng;docker-compose down;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
   tags:
     - preliminaries
 
+# Docker will pull the complete git commit (master/development or another branch)
+# this will take some time, so a 30 second delay is needed to complete the install, maybe more.
 - name: Linnaeus NG | wait for completed installation
   wait_for:
       path: /data/linnaeus/www/.git
       delay: 30
       state: present
       msg: Installation is not completed
+  when: linnaeus_git_directory.stat.exists == false
+  tags:
+    - preliminaries
 
+# Create tools and backup directories if the do not exist
 - name: Linnaeus NG | create tools/output & backup directories
   file:
     path: "{{ item }}"
@@ -86,76 +112,49 @@
   tags:
     - database
 
+# Pull the most recent version of the production (master) git branch
 - name: Linnaeus NG | GIT update code
   shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus /var/www/html/tools/scripts/git.sh'
   register: git_result
   tags:
     - code
 
+# Run composer install for the needed third party php libraries
 - name: Linnaeus NG | composer update
   shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus /var/www/html/tools/scripts/composer.sh'
   register: composer_result
   tags:
     - code
 
+# Run npm, bower and gulp for installing all third party javascript and css, and creating a bundle.
 - name: Linnaeus NG | gulp 
   shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus /var/www/html/tools/scripts/gulp.sh'
   register: gulp_result
   tags:
     - code
 
+# Compare the database model and create a migration if there are differences
 - name: Linnaeus NG | run check_db_cli
   shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus php tools/check_db_cli.php'
   changed_when: false
   tags:
-    - checkdb
+    - database
 
-      #shell: 'cat /opt/docker-linnaeusng/.env;echo {host:"$MYSQL_HOST", rootpass:"$MYSQL_ROOT_PASSWORD", user:"$MYSQL_USER", password:"$MYSQL_PASSWORD"}'
-
-
-- name: Linnaeus NG | source environment
-  shell: 'cat /opt/docker-linnaeusng/.env'
-  register: result
-  tags:
-    - testenv
-
-- name: Linnaeus NG | store environment
-  set_fact: 
-    output : "{{ result.stdout_lines | list }}"
-  tags:
-    - testenv
-
-- name: Debug
-  debug:
-    msg: 'PASS: {{output.password}} USER: {{output.user}}'
-  tags:
-    - testenv
-
-- name: Linnaeus NG | show environment
-  shell: '. /opt/docker-linnaeusng/.env;echo {"host":"$MYSQL_HOST", "rootpass":"$MYSQL_ROOT_PASSWORD", "user":"$MYSQL_USER", "password":"$MYSQL_PASSWORD"}'
-  register: dockerconfig
-  tags:
-    - environment
-
-- name: Linnaeus NG | display environment
-  debug:
-    msg: "Mysql User: {{ dockerconfig.user }}" 
-  tags:
-    - environment
-
-# todo: retrieve the root password from the installation
-- name: Linnaeus NG | backup existing LNG-database
-  mysql_db:
-    login_host: 127.0.0.1
-    login_port: 3306
-    login_user: root
-    login_password: us-ae-linn
-    state: dump
-    name: linnaeus_ng
-    target: /data/linnaeus/backup/lng/{{ ansible_date_time.iso8601_basic_short }}-auto-backup.sql.gz
+# Retrieve the 'external' database port on the host machine from the environment
+- name: Linnaeus NG | database port
+  shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus printenv MYSQL_EXTERNAL_PORT'
+  register: mysql_external_port
   tags:
     - database
 
+# Retrieve the root password of the database on the host machine from the environment
+- name: Linnaeus NG | database root password
+  shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus printenv MYSQL_ROOT_PASSWORD'
+  register: mysql_root_password
+  tags:
+    - database
+
+# Check if the migration mysql file exists
 - name: Linnaeus NG | checking if latest-modify.sql exists
   stat:
     path: /data/linnaeus/www/tools/output/latest-modify.sql
@@ -163,8 +162,13 @@
   tags:
     - database
 
+# Backup the complete database, if there is a migration
 - name: Linnaeus NG | backup existing LNG-database
   mysql_db:
+    login_host: 127.0.0.1
+    login_port: "{{ mysql_external_port.stdout }}"
+    login_user: root
+    login_password: "{{ mysql_root_password.stdout }}"
     state: dump
     name: linnaeusng
     target: /var/backup/lng/{{ ansible_date_time.iso8601_basic_short }}-auto-backup.sql.gz
@@ -172,15 +176,21 @@
   tags:
     - database
 
+# Import the database migration
 - name: Linnaeus NG | import latest-modify.sql
   mysql_db:
+    login_host: 127.0.0.1
+    login_port: "{{ mysql_external_port.stdout }}"
+    login_user: root
+    login_password: "{{ mysql_root_password.stdout }}"
     state: import
     name: linnaeusng
     target: /data/linnaeus/www/tools/output/latest-modify.sql
-  when: latest_modify_sql.stat.exists == True
+  when: latest_modify_sql.stat.exists == true
   tags:
     - database
 
+# Check for errors
 - name: Linnaeus NG | check latest errors-file
   shell: cat /data/linnaeus/www/tools/output/latest-errors.txt
   register: latest_errors
@@ -189,6 +199,7 @@
   tags:
     - database
 
+# Display latest errors
 - name: Linnaeus NG | display lastest errors
   debug:
     var: latest_errors
@@ -196,6 +207,7 @@
   tags:
     - database
 
+# Ensure if the docker image is running
 - name: Ensure Docker Image is running
   docker_container:
       image: naturalis/linnaeus:0.0.1
@@ -203,5 +215,4 @@
       state: started
   tags:
     - docker
-
 
