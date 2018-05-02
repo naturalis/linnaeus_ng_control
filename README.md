@@ -11,6 +11,7 @@ Available Playbooks:
 * lng_update_dev.yml
 * lng_update_test.yml
 * lng_update_production.yml
+* lng_update_docker.yml
 
 Make sure my_user can connect to all servers and has sudo rights. Link to ssh key is stored in ansible.cfg.
 
