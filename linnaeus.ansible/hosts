@@ -1,5 +1,5 @@
 [joepdev]
-linnaeus-docker-dev ansible_host=145.136.242.133
+linnaeus-docker-dev ansible_host=145.136.242.133 ansible_user=ubuntu
 
 [singleserver]
 linnaeus-docker1 ansible_host=145.136.242.138
