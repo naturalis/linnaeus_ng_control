@@ -1,6 +1,15 @@
 [joepdev]
 linnaeus-docker-dev ansible_host=145.136.242.133 ansible_user=ubuntu
 
+[linnaeus-docker-test]
+linnaeus-docker-dev ansible_host=145.136.242.133 ansible_ssh_user=ubuntu
+various-001-linnaeustest ansible_host=145.136.242.138 ansible_ssh_user=joep.vermaat
+various-002-linnaeustest ansible_host=145.136.242.186 ansible_ssh_user=joep.vermaat
+various-003-linnaeustest ansible_host=145.136.242.187 ansible_ssh_user=joep.vermaat
+
+[singledocker]
+various-002-linnaeustest ansible_host=145.136.242.186 ansible_ssh_user=joep.vermaat
+
 [singleserver]
 linnaeus-docker1 ansible_host=145.136.242.138
 

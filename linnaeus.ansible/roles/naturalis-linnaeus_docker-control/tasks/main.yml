@@ -12,6 +12,7 @@
 # Install essential python en mysql packages
 - name: Linnaeus NG | install packages
   with_items:
+    - python
     - python-pip
     - libmysqlclient-dev
     - python-dev
@@ -26,6 +27,13 @@
 - name: Linnaeus NG | install MySQL pip package
   pip:
     name: MySQL
+  tags:
+    - preliminaries
+
+# Install MySQL pip package
+- name: Linnaeus NG | install docker-py pip package
+  pip:
+    name: docker-py
   tags:
     - preliminaries
 
@@ -90,11 +98,11 @@
     - preliminaries
 
 # Docker will pull the complete git commit (master/development or another branch)
-# this will take some time, so a 30 second delay is needed to complete the install, maybe more.
+# this will take some time, so a 60 second delay is needed to complete the install, maybe more.
 - name: Linnaeus NG | wait for completed installation
   wait_for:
       path: /data/linnaeus/www/.git
-      delay: 30
+      delay: 60
       state: present
       msg: Installation is not completed
   when: linnaeus_git_directory.stat.exists == false
@@ -173,6 +181,26 @@
     name: linnaeusng
     target: /var/backup/lng/{{ ansible_date_time.iso8601_basic_short }}-auto-backup.sql.gz
   when: latest_modify_sql.stat.exists == true
+  tags:
+    - database
+
+
+# Importing the update.sql containing essential trait types and translations
+- name: Linnaeus NG | import update.sql
+  mysql_db:
+    login_host: 127.0.0.1
+    login_port: "{{ mysql_external_port.stdout }}"
+    login_user: root
+    login_password: "{{ mysql_root_password.stdout }}"
+    state: import
+    name: linnaeusng
+    target: /data/linnaeus/www/database/update.sql
+  tags:
+    - database
+
+# Set the common settings if they are missing
+- name: Linnaeus NG | run check_settings
+  shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus php tools/check_settings.php'
   tags:
     - database
 
