@@ -15,7 +15,10 @@ some linnaeus installations.
 ## usage
 Run:
 
-```ansible-playbook -u my_user -i hosts --become [playbook.yml]```
+```
+cd linnaeus.ansible
+ansible-playbook -u my_user -i hosts --become [playbook.yml]
+```
 
 Available Playbooks:
 
