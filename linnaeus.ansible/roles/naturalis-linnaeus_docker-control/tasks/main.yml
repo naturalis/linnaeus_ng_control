@@ -30,7 +30,7 @@
   tags:
     - preliminaries
 
-# Install MySQL pip package
+# Install Docker py
 - name: Linnaeus NG | install docker-py pip package
   pip:
     name: docker-py
@@ -120,7 +120,7 @@
   tags:
     - database
 
-# Pull the most recent version of the production (master) git branch
+# Pull the most recent version of the git branch specified in .env
 - name: Linnaeus NG | GIT update code
   shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus /var/www/html/tools/scripts/git.sh'
   register: git_result

@@ -1,31 +1,78 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This role is based on [naturalis-linnaeus_ng-control](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_ng-control) written by Maarten and Atze. It handles similar
+tasks but on dockerized installs.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+To run this playbook docker and docker-composer must by installed on the host machine. The 
+installation is typically located in `/opt/docker-linnaeusng` which should contain clone of
+https://github.com/naturalis/docker-linnaeusng
+
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+There are no role variables defined atm. This may in future be used to make the ansible playbook more 
+versatile and flexible.
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Running the playbook on the test docker hosts.
 
-    - hosts: servers
+    - hosts: linnaeus-docker-test
       roles:
-         - { role: username.rolename, x: 42 }
+        - naturalis-linnaeus_docker-control
+Tasks
+-----
+
+This playbook runs the following tasks in order, see [main.yml](https://github.com/naturalis/linnaeus_ng_control/blob/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control/tasks/main.yml).
+
+
+First show some information about the host machine
+
+* Show the disk remaining space
+* Display the OS version
+
+The handle the preliminaries (tag: preliminaries)
+
+* Install essential python en mysql packages for ansible and python
+* Install MySQL pip package
+* Install Docker py
+* Check '/data/linnaeus' directory
+* Add the initdb directory in /data/linnaeus
+* Copy the content of a default linnaeus install into initdb
+* Create and copy mysqlconf directory if it does not exist
+* Check if the git directory exists
+* Install the dockerized linnaeus install by pulling 'naturalis/linnaeus' and (re)creating the docker compose setup
+* Wait for docker-composer to complete (it will also pull linnaeus from github)
+
+Handle code stuff (tag: code)
+
+* Pull the most recent version of the git branch specified in .env
+* Run composer install for the needed third party php libraries
+* Run npm, bower and gulp for installing all third party javascript and css, and creating a bundle
+
+Handle database stuff (tag: database)
+
+* Create tools and backup directories if the do not exist
+* Compare the database model and create a migration if there are differences
+* Check if the migration mysql file exists
+* Backup the complete database, if there is a migration
+* Importing the update.sql containing essential trait types and translations
+* Set the common settings if they are missing
+* Import the database migration
+* Check for errors
+
+Docker stability (tag: docker)
+
+* Ensure if the docker image is running
+
+
 
 License
 -------
@@ -35,4 +82,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Written by joep.vermaat@naturalis.nl, based on work by maarten.schermer@naturalis.nl
