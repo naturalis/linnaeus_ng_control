@@ -59,7 +59,7 @@ Handle code stuff (tag: code)
 
 Handle database stuff (tag: database)
 
-* Create tools and backup directories if the do not exist
+* Create tools and backup directories if they do not exist
 * Compare the database model and create a migration if there are differences
 * Check if the migration mysql file exists
 * Backup the complete database, if there is a migration
