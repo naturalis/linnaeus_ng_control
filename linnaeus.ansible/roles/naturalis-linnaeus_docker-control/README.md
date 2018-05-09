@@ -7,7 +7,7 @@ tasks but on dockerized installs.
 Requirements
 ------------
 
-To run this playbook docker and docker-composer must by installed on the host machine. The 
+To run this playbook docker and docker-composer must be installed on the host machine. The 
 installation is typically located in `/opt/docker-linnaeusng` which should contain clone of
 https://github.com/naturalis/docker-linnaeusng
 
