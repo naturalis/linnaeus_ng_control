@@ -2,13 +2,19 @@
 linnaeus-docker-dev ansible_host=145.136.242.133 ansible_user=ubuntu
 
 [linnaeus-docker-test]
-linnaeus-docker-dev ansible_host=145.136.242.133 ansible_ssh_user=ubuntu
-various-001-linnaeustest ansible_host=145.136.242.138 ansible_ssh_user=joep.vermaat
-various-002-linnaeustest ansible_host=145.136.242.186 ansible_ssh_user=joep.vermaat
-various-003-linnaeustest ansible_host=145.136.242.187 ansible_ssh_user=joep.vermaat
+various-001-linnaeustest ansible_host=145.136.242.138
+various-002-linnaeustest ansible_host=145.136.242.186
+various-003-linnaeustest ansible_host=145.136.242.187
+
+[linnaeus-docker]
+linnaeus-docker-prd-001 ansible_host=172.16.1.155
+linnaeus-docker-prd-002 ansible_host=172.16.1.157
+linnaeus-docker-prd-003 ansible_host=172.16.1.158
+linnaeus-docker-prd-004 ansible_host=172.16.1.159
+linnaeus-docker-prd-005 ansible_host=172.16.1.160
 
 [singledocker]
-various-002-linnaeustest ansible_host=145.136.242.186 ansible_ssh_user=joep.vermaat
+various-001-linnaeustest ansible_host=145.136.242.138
 
 [singleserver]
 linnaeus-docker1 ansible_host=145.136.242.138
@@ -25,9 +31,6 @@ dev-008 ansible_host=145.136.240.192
 dev-009 ansible_host=145.136.240.193
 
 [test]
-linnaeus-docker1 ansible_host=145.136.242.138
-linnaeus-docker2 ansible_host=145.136.242.186
-linnaeus-docker3 ansible_host=145.136.242.187
 test-001 ansible_host=145.136.241.137
 test-002 ansible_host=145.136.241.255
 test-003 ansible_host=145.136.241.26
