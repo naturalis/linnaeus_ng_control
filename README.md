@@ -26,7 +26,7 @@ Available Playbooks:
 * lng_update_dev.yml
 * lng_update_test.yml
 * lng_update_production.yml
-* lng_update_docker.yml
+* lng_update_docker.yml, [check the detailed docker playbook documentation](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control)
 
 Make sure _my_user_ can connect to all servers and has sudo rights. Link to ssh key is stored in ansible.cfg.
 
@@ -35,8 +35,8 @@ many of the sudo operations in the playbook.
 
 ## hosts
 
-The `hosts` file contains the names, ip numbers and remove ssh users these are grouped by labels. The playbook
-refers to the actual hosts defined in the hosts file. The lng_update_docker.yml playbook contains:
+The `hosts` file contains the names, ip numbers and ssh users, these are grouped by labels. The playbook
+refers to the labeled hosts defined in the hosts file. The lng_update_docker.yml playbook contains:
 
 ```
 - hosts: linnaeus-docker-test
@@ -44,9 +44,10 @@ refers to the actual hosts defined in the hosts file. The lng_update_docker.yml 
     - naturalis-linnaeus_docker-control
 ```
 
-So this playbook runs the `naturalis-linnaeus_dockter-control` ansible tasks script on the machines listed under `linnaeus-docker-test` in the hosts file.
+So this playbook runs the `naturalis-linnaeus_docker-control` ansible tasks script on the machines listed 
+under `linnaeus-docker-test` in the hosts file.
 
-To see what a certain playbook runs on which machines you can call the command with `--list-hosts` parameter.
+To see what a certain playbook does on which machines you can call the command with `--list-hosts` parameter.
 For instance:
 
 ```
@@ -62,7 +63,7 @@ playbook: lng_update_docker.yml
       various-001-linnaeustest
 ```
 
-You can also limit the playbook to just one of these hosts. By using the limit parameter:
+But you can also limit the playbook to just one of these hosts. By using the _--limit_ or _-l_ parameter:
 
 ```
 $ ansible-playbook -l various-003-linnaeustest -i hosts lng_update_docker.yml --become --list-hosts 
@@ -85,7 +86,7 @@ will look something like this:
 
 ## typical usage recipes
 
-Here are some common scenarios when dealing with linnaeus installations.
+Some common scenarios when dealing with linnaeus installations.
 
 ### Updating all linnaeus servers after releasing a new version
 
@@ -93,8 +94,8 @@ This will be most common whenever a new stable release is released.
 
 ```ansible-playbook -u [your username] -i hosts --become lng_update_docker.yml```
 
-A playbook can fail on certain machines. You should always try again and if the problem persists, check 
-the error or increase verbosity '-v', '-vv' or even '-vvv'.
+A playbook can fail on some machines. You should always try again and if the problem persists, check 
+the error or increase verbosity '-v', '-vv' or even '-vvv' and then try and fix the issue.
 
 ### Updating a single linnaeus server after releasing a new version
 
@@ -107,7 +108,7 @@ This will be done if you just want to test if a certain machine works.
 * create a new branch of linnaeus containing your special version
 * push it to the linnaeus repository
 * log on to the server you want to run a different version on
-* change `/opt/docker-linnaeusng/.env', set a different GIT_BRANCH (same to the one you just set)
+* change `/opt/docker-linnaeusng/.env', set a different GIT_BRANCH (same to the one you just created)
 * logout
 
 ```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_docker.yml```
@@ -119,7 +120,7 @@ of linnaeus. With these steps you can setup a new machine in minutes.
 
 * `scp` a recent mysql dump of a linnaeus installation to the server
 * log on to the server you want to reinstall
-* become root
+* become root (_sudo su_)
 * `rm /data/linnaeus/4_new_project_and_user.sql`
 * `echo "USE linnaeus_ng" > /data/linnaeus/4_linnaeusdb.sql`
 * `cat /path/to/your/recent/dump.sql >> /data/linnaeus/4_linnaeusdb.sql`
@@ -128,11 +129,11 @@ of linnaeus. With these steps you can setup a new machine in minutes.
 
 ```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_docker.yml```
 
-This will rebuild the docker configuration as well is reinstall linnaeus and install the database.
+This will rebuild the docker configuration as well as reinstall linnaeus and load the database.
 
-### Only running one task on one machine
+### Only running one group of tasks on one machine using _-t_
 
-```ansible-playbook -u [your username] -l [exact host name] -t gulp -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -l [exact host name] -t code -i hosts --become lng_update_docker.yml```
 
 If you only want to run the task tagged 'code' on one host.
 
