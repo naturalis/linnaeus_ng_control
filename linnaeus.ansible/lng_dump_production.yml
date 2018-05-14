@@ -1,0 +1,26 @@
+- hosts: firsttodocker
+  tasks:
+      - name: install packages
+        with_items:
+         - python3-pip
+         - libmysqlclient-dev
+         - python3-dev
+         - python-mysqldb
+        apt:
+            name: "{{ item }}"
+
+      - name: dump database
+        mysql_db:
+            state: dump
+            name: linnaeusng
+            target: /root/{{ ansible_hostname }}-{{ ansible_date_time.iso8601_basic_short }}.sql.gz
+
+
+      - shell: (cd /root; find . -name '*.sql.gz' -type f) | cut -d '/' -f2
+        register: files_to_copy
+        tags: fetch
+
+      - name: fetch database dumps
+        fetch: src=/root/{{ item }} dest=../dbs
+        with_items: "{{ files_to_copy.stdout_lines }}"
+        tags: fetch

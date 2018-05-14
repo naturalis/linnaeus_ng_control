@@ -13,6 +13,13 @@ linnaeus-docker-prd-003 ansible_host=172.16.1.158
 linnaeus-docker-prd-004 ansible_host=172.16.1.159
 linnaeus-docker-prd-005 ansible_host=172.16.1.160
 
+[firsttodocker]
+various-001 ansible_host=172.16.1.52
+various-014 ansible_host=172.16.1.66
+various-015 ansible_host=172.16.1.67
+various-027 ansible_host=172.16.1.96
+various-009 ansible_host=172.16.1.61
+
 [singledocker]
 various-001-linnaeustest ansible_host=145.136.242.138
 
@@ -40,7 +47,6 @@ test-006 ansible_host=145.136.241.29
 demo-linnaeusng-002 ansible_host=162.13.81.28
 
 [production]
-various-001 ansible_host=172.16.1.52
 various-002 ansible_host=172.16.1.54
 various-003 ansible_host=172.16.1.55
 various-004 ansible_host=172.16.1.56
@@ -54,7 +60,6 @@ various-011 ansible_host=172.16.1.63
 various-012 ansible_host=172.16.1.64
 various-013 ansible_host=172.16.1.65
 various-014 ansible_host=172.16.1.66
-various-015 ansible_host=172.16.1.67
 various-016 ansible_host=172.16.1.75
 various-017 ansible_host=172.16.1.79
 various-018 ansible_host=172.16.1.76
