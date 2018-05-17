@@ -3,6 +3,8 @@
   shell: crontab -l | sed '/^[[:blank:]]*#/d;s/#.*//'
   changed_when: false
   register: crontab_entries
+  tags:
+    - crontab
 
 - name: Linnaeus NG | checking if /var/www/linnaeusng/.htaccess exists
   stat:
@@ -77,6 +79,8 @@
   debug:
     var: crontab_entries.stdout_lines
   when: crontab_entries is defined
+  tags:
+    - crontab
 
 - name: Linnaeus NG | output .htaccess
   debug:

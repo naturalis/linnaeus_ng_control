@@ -12,23 +12,29 @@
 # Install essential python en mysql packages
 - name: Linnaeus NG | install packages
   with_items:
-    - python
-    - python-pip
+    - python3
+    - python3-pip
     - libmysqlclient-dev
-    - python-dev
+    - python3-dev
     - mysql-client
+    - python3-mysqldb
   apt:
     name: "{{ item }}"
     update_cache: no
   tags:
     - preliminaries
 
-# Install MySQL pip package
-- name: Linnaeus NG | install MySQL pip package
-  pip:
-    name: MySQL
+- name: Linnaeus NG | pip upgrade
+  shell: 'pip install --upgrade pip'
   tags:
     - preliminaries
+
+# Install MySQL pip package
+#- name: Linnaeus NG | install MySQL pip package
+#  pip:
+#    name: MySQL
+#  tags:
+#    - preliminaries
 
 # Install Docker py
 - name: Linnaeus NG | install docker-py pip package
@@ -46,7 +52,7 @@
     - preliminaries
 
 # Create a linnaeus install directory
-- name: Linnaeus NG | copy existing initdb directory
+- name: Linnaeus NG | create linnaeus directory 
   shell: 'mkdir /data/linnaeus'
   when: linnaeus_directory.stat.exists == false
   tags:
@@ -93,7 +99,7 @@
 # Install the dockerized linnaeus install by pulling 'naturalis/linnaeus' and (re)creating 
 # the docker compose setup
 - name: Linnaeus NG | install docker linnaeus
-  shell: 'cd /opt/docker-linnaeusng;docker-compose down;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
+  shell: 'cd /opt/docker-linnaeusng;docker-compose down;git pull;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
   tags:
     - preliminaries
 

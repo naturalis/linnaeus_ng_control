@@ -24,3 +24,6 @@
         fetch: src=/root/{{ item }} dest=../dbs
         with_items: "{{ files_to_copy.stdout_lines }}"
         tags: fetch
+
+# @todo:
+# removing all the databases that have been dumped from the source

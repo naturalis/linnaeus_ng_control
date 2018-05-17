@@ -7,15 +7,15 @@ various-002-linnaeustest ansible_host=145.136.242.186
 various-003-linnaeustest ansible_host=145.136.242.187
 
 [linnaeus-docker]
-linnaeus-docker-prd-001 ansible_host=172.16.1.155
-linnaeus-docker-prd-002 ansible_host=172.16.1.157
-linnaeus-docker-prd-003 ansible_host=172.16.1.158
-linnaeus-docker-prd-004 ansible_host=172.16.1.159
-linnaeus-docker-prd-005 ansible_host=172.16.1.160
+linnaeus-docker-prd-001 ansible_host=172.16.1.155 ansible_python_interpreter=/usr/bin/python3
+linnaeus-docker-prd-002 ansible_host=172.16.1.157 ansible_python_interpreter=/usr/bin/python3
+linnaeus-docker-prd-003 ansible_host=172.16.1.158 ansible_python_interpreter=/usr/bin/python3
+linnaeus-docker-prd-004 ansible_host=172.16.1.159 ansible_python_interpreter=/usr/bin/python3
+linnaeus-docker-prd-005 ansible_host=172.16.1.160 ansible_python_interpreter=/usr/bin/python3
 
 [firsttodocker]
 various-001 ansible_host=172.16.1.52
-various-014 ansible_host=172.16.1.66
+nsr-linnaeusng-001 ansible_host=145.136.241.65
 various-015 ansible_host=172.16.1.67
 various-027 ansible_host=172.16.1.96
 various-009 ansible_host=172.16.1.61
