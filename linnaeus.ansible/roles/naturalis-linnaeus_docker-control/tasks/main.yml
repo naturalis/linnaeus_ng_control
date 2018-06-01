@@ -18,6 +18,8 @@
     - python3-dev
     - mysql-client
     - python3-mysqldb
+    - figlet
+    - toilet
   apt:
     name: "{{ item }}"
     update_cache: no
@@ -25,7 +27,7 @@
     - preliminaries
 
 - name: Linnaeus NG | pip upgrade
-  shell: 'pip install --upgrade pip'
+  shell: 'pip3 install --upgrade pip'
   tags:
     - preliminaries
 

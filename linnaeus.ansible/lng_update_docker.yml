@@ -1,3 +1,3 @@
-- hosts: linnaeus-docker
+- hosts: production
   roles:
     - naturalis-linnaeus_docker-control
