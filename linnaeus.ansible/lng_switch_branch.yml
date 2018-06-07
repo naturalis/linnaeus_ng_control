@@ -1,0 +1,6 @@
+- hosts: just-one-docker
+  tasks:
+    - name: Linnaeus NG | GIT fetch master
+      shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus git fetch origin master:master'
+    - name: Linnaeus NG | GIT checkout master
+      shell: 'cd /opt/docker-linnaeusng && docker-compose exec -T linnaeus git checkout master'

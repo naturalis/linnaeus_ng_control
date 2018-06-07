@@ -1,0 +1,39 @@
+- hosts: dest
+  tasks:
+      - name: untar project
+        shell: (cd /root && tar xzf ~joep.vermaat/lng-*.tgz)
+        tags: install
+       
+      - name: reset initdb
+        shell: (cd /opt/docker-linnaeusng/linnaeus/ && git checkout -- initdb)
+        tags: install
+        
+      - name: new db klaarzetten
+        shell: (cd /opt/docker-linnaeusng/linnaeus/initdb/ && echo "USE linnaeus_ng;" > 5-project-db.sql && cat /root/lng_config/linnaeus_ng.sql >> 5-project-db.sql)
+        tags: install
+
+      - name: weg linnaeus
+        shell: '(cd /data/ && rm -rf linnaeus)'
+        tags: install
+
+      - name: app media
+        shell: '(cd /data/linnaeus/www/www/app/media && cp -r ~/lng_config/media-app/* .)'
+        ignore_errors: yes
+        tags: media
+
+      - name: chmod 777 project media
+        shell: '(cd /data/linnaeus/www/www/app/media && chown -R 777 project)'
+        ignore_errors: yes
+        tags: media
+
+      - name: shared media
+        shell: '(cd /data/linnaeus/www/www/shared/media && cp -r ~/lng_config/media-shared/* .)'
+        ignore_errors: yes
+        tags: media
+
+      - name: chmod 777 project media
+        shell: '(cd /data/linnaeus/www/www/shared/media && chown -R 777 project)'
+        ignore_errors: yes
+        tags: media
+
+

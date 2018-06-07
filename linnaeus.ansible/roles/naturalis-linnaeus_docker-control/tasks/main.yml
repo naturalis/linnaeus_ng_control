@@ -39,11 +39,11 @@
 #    - preliminaries
 
 # Install Docker py
-- name: Linnaeus NG | install docker-py pip package
-  pip:
-    name: docker-py
-  tags:
-    - preliminaries
+#- name: Linnaeus NG | install docker-py pip package
+#  pip:
+#    name: docker
+#  tags:
+#    - preliminaries
 
 # Linnaeus install directory should exist
 - name: Linnaeus NG | checking if linnaeus directory exists

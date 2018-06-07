@@ -1,94 +1,23 @@
-[joepdev]
+[dev]
 linnaeus-docker-dev ansible_host=145.136.242.133 ansible_user=ubuntu
 
-[linnaeus-docker-test]
-various-001-linnaeustest ansible_host=145.136.242.138
-various-002-linnaeustest ansible_host=145.136.242.186
-various-003-linnaeustest ansible_host=145.136.242.187
-
-[linnaeus-docker]
-linna-001-determineren ansible_host=172.16.1.155 ansible_python_interpreter=/usr/bin/python3
-linna-002-nsr ansible_host=172.16.1.157 ansible_python_interpreter=/usr/bin/python3
-linna-003-csr ansible_host=172.16.1.158 ansible_python_interpreter=/usr/bin/python3
-linna-004-euphausiids ansible_host=172.16.1.159 ansible_python_interpreter=/usr/bin/python3
-linna-005-legacy ansible_host=172.16.1.160 ansible_python_interpreter=/usr/bin/python3
-linna-006-training1 ansible_host=172.16.1.167 ansible_python_interpreter=/usr/bin/python3
-linna-007-pteromalus ansible_host=172.16.1.162 ansible_python_interpreter=/usr/bin/python3
-linna-008-lithocollatinae ansible_host=172.16.1.164 ansible_python_interpreter=/usr/bin/python3
-linna-009-orchids ansible_host=172.16.1.165 ansible_python_interpreter=/usr/bin/python3
-linna-010-heukels ansible_host=172.16.1.166 ansible_python_interpreter=/usr/bin/python3
-linna-011-belgique ansible_host=172.16.1.168 ansible_python_interpreter=/usr/bin/python3
-linna-012-odonata ansible_host=172.16.1.169 ansible_python_interpreter=/usr/bin/python3
-linna-013-pteridophyte ansible_host=172.16.1.170 ansible_python_interpreter=/usr/bin/python3
-linna-014-plantgenera ansible_host=172.16.1.171 ansible_python_interpreter=/usr/bin/python3
-linna-015-oggngbotany ansible_host=172.16.1.172 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-016.naturalis.nl ansible_host=172.16.1.185 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-017.naturalis.nl ansible_host=172.16.1.175 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-018.naturalis.nl ansible_host=172.16.1.176 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-021.naturalis.nl ansible_host=172.16.1.179 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-022.naturalis.nl ansible_host=172.16.1.181 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-023.naturalis.nl ansible_host=172.16.1.182 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-024.naturalis.nl ansible_host=172.16.1.183 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-025.naturalis.nl ansible_host=172.16.1.184 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-026 ansible_host=172.16.1.186 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-027 ansible_host=172.16.1.187 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-028 ansible_host=172.16.1.188 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-029 ansible_host=172.16.1.189 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-030 ansible_host=172.16.1.190 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-031 ansible_host=172.16.1.191 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-032 ansible_host=172.16.1.192 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-033 ansible_host=172.16.1.193 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-034 ansible_host=172.16.1.194 ansible_python_interpreter=/usr/bin/python3
-
-[install-docker]
-linnaeus-docker-prd-026 ansible_host=172.16.1.186 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-027 ansible_host=172.16.1.187 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-028 ansible_host=172.16.1.188 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-029 ansible_host=172.16.1.189 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-030 ansible_host=172.16.1.190 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-031 ansible_host=172.16.1.191 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-032 ansible_host=172.16.1.192 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-033 ansible_host=172.16.1.193 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-034 ansible_host=172.16.1.194 ansible_python_interpreter=/usr/bin/python3
-
-[failedtomove]
-heukels-001 ansible_host=134.213.157.117
-
-[heukelsagain]
-heukels-001 ansible_host=134.213.157.117
-
-[firsttodocker]
-various-001 ansible_host=172.16.1.52
-nsr-linnaeusng-001 ansible_host=145.136.241.65
-various-015 ansible_host=172.16.1.67
-various-027 ansible_host=172.16.1.96
-various-009 ansible_host=172.16.1.61
-
-[singledocker]
-linnaeus-docker-prd-019.naturalis.nl ansible_host=172.16.1.177 ansible_python_interpreter=/usr/bin/python3
-
-[singleserver]
-linnaeus-docker1 ansible_host=145.136.242.138
-
-[development]
-dev-001 ansible_host=145.136.240.185
-dev-002 ansible_host=145.136.240.181
-dev-003 ansible_host=145.136.240.186
-dev-004 ansible_host=145.136.240.187
-dev-005 ansible_host=145.136.240.189
-dev-006 ansible_host=145.136.240.190
-dev-007 ansible_host=145.136.240.191
-dev-008 ansible_host=145.136.240.192
-dev-009 ansible_host=145.136.240.193
-
 [test]
-test-001 ansible_host=145.136.241.137
-test-002 ansible_host=145.136.241.255
-test-003 ansible_host=145.136.241.26
-test-004 ansible_host=145.136.241.27
-test-005 ansible_host=145.136.241.28
-test-006 ansible_host=145.136.241.29
-demo-linnaeusng-002 ansible_host=162.13.81.28
+test-001 ansible_host=172.16.1.116 ansible_python_interpreter=/usr/bin/python3
+test-002 ansible_host=172.16.1.117 ansible_python_interpreter=/usr/bin/python3
+test-003 ansible_host=172.16.1.118 ansible_python_interpreter=/usr/bin/python3
+test-004 ansible_host=172.16.1.122 ansible_python_interpreter=/usr/bin/python3
+test-005 ansible_host=172.16.1.123 ansible_python_interpreter=/usr/bin/python3
+
+[test-notused]
+linna-test-006 ansible_host=172.16.1.124 ansible_python_interpreter=/usr/bin/python3
+linna-test-007 ansible_host=172.16.1.125 ansible_python_interpreter=/usr/bin/python3
+linna-test-008 ansible_host=172.16.1.126 ansible_python_interpreter=/usr/bin/python3
+linna-test-009 ansible_host=172.16.1.127 ansible_python_interpreter=/usr/bin/python3
+linna-test-010 ansible_host=172.16.1.128 ansible_python_interpreter=/usr/bin/python3
+
+[production-notused]
+linna-019-pteromalus ansible_host=172.16.1.177 ansible_python_interpreter=/usr/bin/python3
+linna-020-heukels1 ansible_host=172.16.1.178 ansible_python_interpreter=/usr/bin/python3
 
 [production]
 linna-001-determineren ansible_host=172.16.1.155 ansible_python_interpreter=/usr/bin/python3
@@ -106,20 +35,23 @@ linna-012-odonata ansible_host=172.16.1.169 ansible_python_interpreter=/usr/bin/
 linna-013-pteridophyte ansible_host=172.16.1.170 ansible_python_interpreter=/usr/bin/python3
 linna-014-plantgenera ansible_host=172.16.1.171 ansible_python_interpreter=/usr/bin/python3
 linna-015-oggngbotany ansible_host=172.16.1.172 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-016.naturalis.nl ansible_host=172.16.1.185 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-017.naturalis.nl ansible_host=172.16.1.175 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-018.naturalis.nl ansible_host=172.16.1.176 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-021.naturalis.nl ansible_host=172.16.1.179 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-022.naturalis.nl ansible_host=172.16.1.181 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-023.naturalis.nl ansible_host=172.16.1.182 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-024.naturalis.nl ansible_host=172.16.1.183 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-025.naturalis.nl ansible_host=172.16.1.184 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-026 ansible_host=172.16.1.186 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-027 ansible_host=172.16.1.187 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-028 ansible_host=172.16.1.188 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-029 ansible_host=172.16.1.189 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-030 ansible_host=172.16.1.190 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-031 ansible_host=172.16.1.191 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-032 ansible_host=172.16.1.192 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-033 ansible_host=172.16.1.193 ansible_python_interpreter=/usr/bin/python3
-linnaeus-docker-prd-034 ansible_host=172.16.1.194 ansible_python_interpreter=/usr/bin/python3
+linna-016-dierenzoeker ansible_host=172.16.1.185 ansible_python_interpreter=/usr/bin/python3
+linna-017-glomera ansible_host=172.16.1.175 ansible_python_interpreter=/usr/bin/python3
+linna-018-afrikaansgras ansible_host=172.16.1.176 ansible_python_interpreter=/usr/bin/python3
+linna-021-paleawants ansible_host=172.16.1.179 ansible_python_interpreter=/usr/bin/python3
+linna-022-rauwolf ansible_host=172.16.1.181 ansible_python_interpreter=/usr/bin/python3
+linna-023-ceylon ansible_host=172.16.1.182 ansible_python_interpreter=/usr/bin/python3
+linna-024-cetacean ansible_host=172.16.1.183 ansible_python_interpreter=/usr/bin/python3
+linna-025-asianflower ansible_host=172.16.1.184 ansible_python_interpreter=/usr/bin/python3
+linna-026-grasshoppers ansible_host=172.16.1.186 ansible_python_interpreter=/usr/bin/python3
+linna-027-leguminosa ansible_host=172.16.1.187 ansible_python_interpreter=/usr/bin/python3
+linna-028-floragabon ansible_host=172.16.1.188 ansible_python_interpreter=/usr/bin/python3
+linna-029-redsea ansible_host=172.16.1.189 ansible_python_interpreter=/usr/bin/python3
+linna-030-floraguianas ansible_host=172.16.1.190 ansible_python_interpreter=/usr/bin/python3
+linna-031-amfibieen ansible_host=172.16.1.191 ansible_python_interpreter=/usr/bin/python3
+linna-032-viva ansible_host=172.16.1.192 ansible_python_interpreter=/usr/bin/python3
+linna-033-unknown ansible_host=172.16.1.193 ansible_python_interpreter=/usr/bin/python3
+linna-034-bladhaantjes ansible_host=172.16.1.194 ansible_python_interpreter=/usr/bin/python3
+
+[failedtomove]
+heukels-001 ansible_host=134.213.157.117
