@@ -23,7 +23,7 @@ Example Playbook
 
 Running the playbook on the test docker hosts.
 
-    - hosts: linnaeus-docker-test
+    - hosts: production
       roles:
         - naturalis-linnaeus_docker-control
 
@@ -42,7 +42,6 @@ The handle the preliminaries (tag: _preliminaries_)
 
 * Install essential python en mysql packages for ansible and python
 * Install MySQL pip package
-* Install Docker py
 * Check `/data/linnaeus` directory
 * Add the `initdb` directory in `/data/linnaeus`
 * Copy the content of a default linnaeus install into `initdb`

@@ -1,4 +1,0 @@
-- hosts: test
-  tasks:
-    - name: Linnaeus NG | GIT checkout master
-      shell: '(cd /opt/docker-linnaeusng && /usr/local/bin/docker-compose exec -T linnaeus "cd .. && git clone git@github.com:naturalis/linnaeus_ng.git && rm -rf html/.git && mv linnaeus_ng/.git html/ && rm -rf linnaeus_ng && cd html/ && git checkout -- .  ")'

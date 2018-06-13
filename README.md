@@ -22,24 +22,25 @@ ansible-playbook -u my_user -i hosts --become [playbook.yml]
 
 Available Playbooks:
 
-* lng_update_all.yml
-* lng_update_dev.yml
+* lng_update_production.yml [check the detailed docker playbook documentation](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control)
 * lng_update_test.yml
-* lng_update_production.yml
-* lng_update_docker.yml, [check the detailed docker playbook documentation](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control)
 
 Make sure _my_user_ can connect to all servers and has sudo rights. Link to ssh key is stored in ansible.cfg.
 
 _my_user_ can also be configured in the hosts file. Also do not forget the --become for this is needed for
 many of the sudo operations in the playbook.
 
+Please note that ssh-bastion.conf contains a ProxyCommand for using a stepping stone to reach certain servers the test servers
+can be reached throught 145.136.242.19, the production servers via 145.136.241.215
+
+
 ## hosts
 
 The `hosts` file contains the names, ip numbers and ssh users, these are grouped by labels. The playbook
-refers to the labeled hosts defined in the hosts file. The lng_update_docker.yml playbook contains:
+refers to the labeled hosts defined in the hosts file. The lng_update_production.yml playbook contains:
 
 ```
-- hosts: linnaeus-docker-test
+- hosts: production
   roles:
     - naturalis-linnaeus_docker-control
 ```
@@ -51,9 +52,9 @@ To see what a certain playbook does on which machines you can call the command w
 For instance:
 
 ```
-$ ansible-playbook -i hosts lng_update_docker.yml --list-hosts
+$ ansible-playbook -i hosts lng_update_production.yml --list-hosts
 
-playbook: lng_update_docker.yml
+playbook: lng_update_production.yml
 
   play #1 (linnaeus-docker-test): linnaeus-docker-test	TAGS: []
     pattern: [u'linnaeus-docker-test']
@@ -66,9 +67,9 @@ playbook: lng_update_docker.yml
 But you can also limit the playbook to just one of these hosts. By using the _--limit_ or _-l_ parameter:
 
 ```
-$ ansible-playbook -l various-003-linnaeustest -i hosts lng_update_docker.yml --become --list-hosts 
+$ ansible-playbook -l various-003-linnaeustest -i hosts lng_update_production.yml --become --list-hosts 
 
-playbook: lng_update_docker.yml
+playbook: lng_update_production.yml
 
   play #1 (linnaeus-docker-test): linnaeus-docker-test	TAGS: []
     pattern: [u'linnaeus-docker-test']
@@ -92,7 +93,7 @@ Some common scenarios when dealing with linnaeus installations.
 
 This will be most common whenever a new stable release is released.
 
-```ansible-playbook -u [your username] -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -i hosts --become lng_update_production.yml```
 
 A playbook can fail on some machines. You should always try again and if the problem persists, check 
 the error or increase verbosity '-v', '-vv' or even '-vvv' and then try and fix the issue.
@@ -101,7 +102,7 @@ the error or increase verbosity '-v', '-vv' or even '-vvv' and then try and fix 
 
 This will be done if you just want to test if a certain machine works.
 
-```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_production.yml```
 
 ### Installing a specific version of a linnaeus installation on a certain server
 
@@ -111,7 +112,7 @@ This will be done if you just want to test if a certain machine works.
 * change `/opt/docker-linnaeusng/.env', set a different GIT_BRANCH (same to the one you just created)
 * logout
 
-```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_production.yml```
 
 ### Completely reinstall a certain linnaeus installation
 
@@ -127,13 +128,13 @@ of linnaeus. With these steps you can setup a new machine in minutes.
 * `rm -rf /data/linnaeus/www`
 * logout
 
-```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -l [exact host name] -i hosts --become lng_update_production.yml```
 
 This will rebuild the docker configuration as well as reinstall linnaeus and load the database.
 
 ### Only running one group of tasks on one machine using _-t_
 
-```ansible-playbook -u [your username] -l [exact host name] -t code -i hosts --become lng_update_docker.yml```
+```ansible-playbook -u [your username] -l [exact host name] -t code -i hosts --become lng_update_production.yml```
 
 If you only want to run the task tagged 'code' on one host.
 
