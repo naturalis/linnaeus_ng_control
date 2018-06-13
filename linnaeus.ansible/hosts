@@ -2,14 +2,14 @@
 linnaeus-docker-dev ansible_host=145.136.242.133 ansible_user=ubuntu
 
 [test]
-test-001 ansible_host=172.16.1.116 ansible_python_interpreter=/usr/bin/python3
-test-002 ansible_host=172.16.1.117 ansible_python_interpreter=/usr/bin/python3
-test-003 ansible_host=172.16.1.118 ansible_python_interpreter=/usr/bin/python3
-test-004 ansible_host=172.16.1.122 ansible_python_interpreter=/usr/bin/python3
-test-005 ansible_host=172.16.1.123 ansible_python_interpreter=/usr/bin/python3
+test-001 ansible_host=145.136.242.138 ansible_python_interpreter=/usr/bin/python3
+test-002 ansible_host=145.136.242.186 ansible_python_interpreter=/usr/bin/python3
+test-003 ansible_host=145.136.242.206 ansible_python_interpreter=/usr/bin/python3
+test-004 ansible_host=145.136.242.20 ansible_python_interpreter=/usr/bin/python3
+test-005 ansible_host=145.136.242.200 ansible_python_interpreter=/usr/bin/python3
 
 [test-notused]
-linna-test-006 ansible_host=172.16.1.124 ansible_python_interpreter=/usr/bin/python3
+test-006 ansible_host=172.16.1.124 ansible_python_interpreter=/usr/bin/python3
 linna-test-007 ansible_host=172.16.1.125 ansible_python_interpreter=/usr/bin/python3
 linna-test-008 ansible_host=172.16.1.126 ansible_python_interpreter=/usr/bin/python3
 linna-test-009 ansible_host=172.16.1.127 ansible_python_interpreter=/usr/bin/python3

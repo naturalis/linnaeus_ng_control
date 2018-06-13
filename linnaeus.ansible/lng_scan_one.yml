@@ -1,3 +1,0 @@
-- hosts: singleserver
-  roles:
-    - naturalis-linnaeus_ng-scan

@@ -1,4 +1,4 @@
-- hosts: dest
+- hosts: test
   tasks:
       - name: untar project
         shell: (cd /root && tar xzf ~joep.vermaat/lng-*.tgz)

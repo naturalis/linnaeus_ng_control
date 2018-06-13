@@ -1,3 +1,0 @@
-- hosts: development
-  roles:
-    - naturalis-linnaeus_ng-control

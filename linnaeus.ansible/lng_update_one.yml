@@ -1,3 +1,0 @@
-- hosts: singledocker
-  roles:
-    - naturalis-linnaeus_docker-control

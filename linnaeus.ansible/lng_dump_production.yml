@@ -1,3 +1,7 @@
+#
+# Ansible script used for dumping the old databases and configuration 
+# files of the former production machines (june 2018, Linnaeus 2.5.x)
+#
 - hosts: source
   tasks:
 
