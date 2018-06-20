@@ -246,7 +246,7 @@
 # Ensure if the docker image is running
 - name: Ensure Docker Image is running
   docker_container:
-      image: naturalis/linnaeus:0.0.1
+      image: naturalis/linnaeus:0.0.2
       name: linnaeus
       state: started
   tags:

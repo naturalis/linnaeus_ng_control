@@ -27,7 +27,7 @@ linna-004-euphausiids ansible_host=172.16.1.159 ansible_python_interpreter=/usr/
 linna-005-legacy ansible_host=172.16.1.160 ansible_python_interpreter=/usr/bin/python3
 linna-006-training1 ansible_host=172.16.1.167 ansible_python_interpreter=/usr/bin/python3
 linna-007-pteromalus ansible_host=172.16.1.162 ansible_python_interpreter=/usr/bin/python3
-linna-008-lithocollatinae ansible_host=172.16.1.164 ansible_python_interpreter=/usr/bin/python3
+linna-008-seab ansible_host=172.16.1.164 ansible_python_interpreter=/usr/bin/python3
 linna-009-orchids ansible_host=172.16.1.165 ansible_python_interpreter=/usr/bin/python3
 linna-010-heukels ansible_host=172.16.1.166 ansible_python_interpreter=/usr/bin/python3
 linna-011-belgique ansible_host=172.16.1.168 ansible_python_interpreter=/usr/bin/python3
