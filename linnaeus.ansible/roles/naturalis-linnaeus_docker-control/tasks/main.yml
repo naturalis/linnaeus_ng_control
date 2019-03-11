@@ -101,7 +101,7 @@
 # Install the dockerized linnaeus install by pulling 'naturalis/linnaeus' and (re)creating 
 # the docker compose setup
 - name: Linnaeus NG | install docker linnaeus
-  shell: 'cd /opt/docker-linnaeusng;docker-compose down;git pull;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
+  shell: 'cd /opt/docker-linnaeusng;docker-compose down --rmi all;git pull;docker pull naturalis/linnaeus;docker-compose up -d --force-recreate'
   tags:
     - preliminaries
 
@@ -186,7 +186,7 @@
     login_user: root
     login_password: "{{ mysql_root_password.stdout }}"
     state: dump
-    name: linnaeusng
+    name: linnaeus_ng
     target: /var/backup/lng/{{ ansible_date_time.iso8601_basic_short }}-auto-backup.sql.gz
   when: latest_modify_sql.stat.exists == true
   tags:
@@ -201,7 +201,7 @@
     login_user: root
     login_password: "{{ mysql_root_password.stdout }}"
     state: import
-    name: linnaeusng
+    name: linnaeus_ng
     target: /data/linnaeus/www/database/update.sql
   tags:
     - database
@@ -220,7 +220,7 @@
     login_user: root
     login_password: "{{ mysql_root_password.stdout }}"
     state: import
-    name: linnaeusng
+    name: linnaeus_ng
     target: /data/linnaeus/www/tools/output/latest-modify.sql
   when: latest_modify_sql.stat.exists == true
   tags:
