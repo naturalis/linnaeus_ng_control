@@ -1,3 +1,4 @@
 - hosts: production
+  become: true
   roles:
     - naturalis-linnaeus_docker-control
