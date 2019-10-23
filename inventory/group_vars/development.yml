@@ -1,0 +1,3 @@
+# vars for development servers
+git_branch_code: development
+ansible_ssh_common_args: '-o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -q 145.136.242.20"'

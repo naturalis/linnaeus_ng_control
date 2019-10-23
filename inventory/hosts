@@ -9,13 +9,11 @@ test-004 ansible_host=145.136.242.20 ansible_python_interpreter=/usr/bin/python3
 test-005 ansible_host=145.136.242.200 ansible_python_interpreter=/usr/bin/python3
 test-006 ansible_host=145.136.242.201 ansible_python_interpreter=/usr/bin/python3
 test-007 ansible_host=145.136.242.205 ansible_python_interpreter=/usr/bin/python3
-test-008 ansible_host=145.136.242.202 ansible_python_interpreter=/usr/bin/python3
+test-008 ansible_host=172.16.1.126 ansible_python_interpreter=/usr/bin/python3
 test-009 ansible_host=145.136.242.203 ansible_python_interpreter=/usr/bin/python3
-linna-036-bees ansible_host=172.16.1.205 ansible_python_interpreter=/usr/bin/python3
-
 
 [test-notused]
-linna-test-010 ansible_host=172.16.1.128 ansible_python_interpreter=/usr/bin/python3
+linna-036-bees ansible_host=172.16.1.205 ansible_python_interpreter=/usr/bin/python3
 
 [production-notused]
 linna-019-pteromalus ansible_host=172.16.1.177 ansible_python_interpreter=/usr/bin/python3
