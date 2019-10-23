@@ -11,6 +11,7 @@ test-006 ansible_host=145.136.242.201 ansible_python_interpreter=/usr/bin/python
 test-007 ansible_host=145.136.242.205 ansible_python_interpreter=/usr/bin/python3
 test-008 ansible_host=172.16.1.126 ansible_python_interpreter=/usr/bin/python3
 test-009 ansible_host=145.136.242.203 ansible_python_interpreter=/usr/bin/python3
+test-010 ansible_host=145.136.242.204 ansible_python_interpreter=/usr/bin/python3
 
 [test-notused]
 linna-036-bees ansible_host=172.16.1.205 ansible_python_interpreter=/usr/bin/python3

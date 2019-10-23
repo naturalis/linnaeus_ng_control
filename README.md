@@ -7,7 +7,8 @@ Ansible Playbooks for controlling Linnaeus NG servers
 Ansible should be installed on your _control machine_, which is usually your local machine or a central
 controller machine.  Remote servers require OpenSSH, Python and should be accessible with your ssh key.
 
-Follow the instructions from the [ansible documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-the-control-machine) on installing.
+Follow the instructions from the 
+[ansible documentation](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-the-control-machine) on installing.
 
 After succesfully installing ansible. Clone this git repository and use the playbooks to control all or
 some linnaeus installations.
@@ -16,31 +17,31 @@ some linnaeus installations.
 Run:
 
 ```
-cd linnaeus.ansible
-ansible-playbook -u my_user -i hosts --become [playbook.yml]
+ansible-playbook -u [your user name] -i inventory --become playbooks/[playbook.yml]
 ```
 
 Available Playbooks:
 
-* lng_update_production.yml [check the detailed docker playbook documentation](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control)
-* lng_update_test.yml
+* update_production.yml [check the detailed docker playbook documentation](https://github.com/naturalis/linnaeus_ng_control/tree/master/linnaeus.ansible/roles/naturalis-linnaeus_docker-control)
+* update_test.yml
 
-Make sure _my_user_ can connect to all servers and has sudo rights. Link to ssh key is stored in ansible.cfg.
+Make sure you can connect to all servers and have sudo rights. Link to ssh key is stored in ansible.cfg.
 
-_my_user_ can also be configured in the hosts file. Also do not forget the --become for this is needed for
+You can also be override your user in the hosts file. Also do not forget the --become for this is needed for
 many of the sudo operations in the playbook.
 
-Please note that ssh-bastion.conf contains a ProxyCommand for using a stepping stone to reach certain servers the test servers
-can be reached throught 145.136.242.19, the production servers via 145.136.241.215
+Please note that ssh-bastion.conf contains a ProxyCommand for using a stepping stone to reach certain servers the 
+test servers can be reached throught 145.136.242.20, the production servers via 145.136.241.215
 
 
 ## hosts
 
 The `hosts` file contains the names, ip numbers and ssh users, these are grouped by labels. The playbook
-refers to the labeled hosts defined in the hosts file. The lng_update_production.yml playbook contains:
+refers to the labeled hosts defined in the hosts file. The update_production.yml playbook contains:
 
 ```
 - hosts: production
+  become: yes
   roles:
     - naturalis-linnaeus_docker-control
 ```
