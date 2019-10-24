@@ -1,4 +1,4 @@
 - hosts: test
   become: true
   roles:
-    - naturalis-linnaeus_docker-control
+    - ../roles/naturalis-linnaeus_docker-control
