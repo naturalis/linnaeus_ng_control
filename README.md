@@ -1,3 +1,11 @@
+**THIS REPOSITORY HAS BEEN MOVED AND IS NO LONGER MAINTAINED**
+
+Pleas checkout the new location at https://gitlab.com/naturalis/bii/linnaeus/ansible-linnaeus, you can update your local checkout code by using this command:
+
+```
+git remote set-url origin git@gitlab.com:naturalis/bii/linnaeus/ansible-linnaeus.git
+```
+
 # linnaeus_ng_control
 Ansible Playbooks for controlling Linnaeus NG servers
 
